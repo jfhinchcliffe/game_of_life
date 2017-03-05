@@ -1,4 +1,4 @@
-#lib/cell.rb
+# lib/cell.rb
 class Cell
   attr_reader :state
   def initialize

@@ -15,7 +15,7 @@ describe Cell do
       @cell.toggle
       expect(@cell.state).to eql 'alive'
     end
-    it 'toggles from alive to dead' do 
+    it 'toggles from alive to dead' do
       @cell.toggle
       expect(@cell.state).to eql 'dead'
     end
