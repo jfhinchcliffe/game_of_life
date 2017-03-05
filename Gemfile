@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+# Gemfile
+source "https://rubygems.org"
 
-# Specify your gem's dependencies in game_of_life.gemspec
-gemspec
+gem "rspec"
