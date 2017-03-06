@@ -3,6 +3,8 @@ require 'board'
 describe Board do
   before(:all) do
     @board = Board.new
+    @random_row = rand(0..19)
+    @random_column = rand(0..79)
   end
 
   describe 'new board' do
@@ -13,10 +15,29 @@ describe Board do
       expect(@board.state[0].length).to eql 80
     end
     it 'should be filled with cells' do
-      row = rand(0..20)
-      column = rand(0..80)
-      sample = @board.state[row][column]
+      sample = @board.state[@random_row][@random_column]
       expect(sample).to be_an_instance_of(Cell)
     end
   end
+
+  describe 'should correctly report location' do
+    it 'should return valid location' do
+      expect(@board.location(@random_row, @random_column)).to eq @board.state[@random_row][@random_column]
+    end
+    it 'should return nil for an invalid location' do
+      expect(@board.location(-1, 100)).to eq nil
+    end
+  end
+
+  describe 'should report cell neighbours' do
+    it 'should return an array of 3 for a corner cell' do
+      result = @board.neighbours(0, 0)
+      expect(result.length).to eq 3
+    end
+    it 'should return an array of 8 neighbours for an inner cell' do
+      result = @board.neighbours(3, 3)
+      expect(result.length).to eq 8
+    end
+  end
+
 end
