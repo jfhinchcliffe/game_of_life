@@ -16,14 +16,18 @@ class Board
   def create_row(columns, random)
     row = []
     columns.times do
-      cell_value = random ? set_random_value : false
+      cell_value = random ? random_value : false
       row << cell_value
     end
     row
   end
 
-  def set_random_value
+  def random_value
     [true, false].sample
+  end
+
+  def set_coordinate_value(row, column, value)
+    @state[row][column] = value
   end
 
   def location(row, column)

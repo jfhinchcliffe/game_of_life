@@ -3,71 +3,43 @@ require 'board'
 class Evolution
   attr_reader :board
   def initialize(board)
-    @board = randomise_state(board)
+    @board = tick(board)
   end
 
-  def randomise_state(board)
-    board.state.each do |row|
-      row.each do |column|
-        column.toggle if flip_a_coin?
+  def tick(original_board)
+    #Create a board the same size as the incoming board
+    evolved_board = Board.new(original_board.state.length, original_board.state[0].length)
+    new_generation(original_board, evolved_board)
+  end
+
+  def new_generation(original_board, evolved_board)
+    original_board.state.each_with_index do |row, row_index|
+      row.each_with_index do |cell, cell_index|
+        # Find neighbours of current cell locaiton
+        neighbours = original_board.neighbours(row_index, cell_index)
+        # Find the neighbours that return true / are live
+        neighbour_live_count = neighbours.select{|value| value == true}.length
+        # Apply the rules to the current cell location, based on neighbours
+        evolved_cell_value = apply_rules(cell, neighbour_live_count)
+        # Set current board coordinate to the result of the applied rules
+        evolved_board.set_coordinate_value(row_index, cell_index, evolved_cell_value)
       end
     end
-    board
+    evolved_board
   end
 
-  def flip_a_coin?
-    [true, false].sample
-  end
-
-  def tick
-    evolved_board = Board.new(5, 10)
-    row_number = 0
-    @board.state.each do |row|
-      puts "ROW"
-      column_number = 0
-      row.each do |column|
-
-        current_cell = @board.location(row_number, column_number)
-        neighbours = @board.neighbours(row_number, column_number)
-        living_neighbours = neighbours.select{|cell| cell.state == 'alive'}.length
-        set_value = apply_rules(living_neighbours)
-        puts 'set value'
-        puts set_value
-        evolved_board.set_coordinate(row_number, column_number, set_value)
-        column_number += 1
-      end
-      puts 'inc row number'
-      row_number += 1
+  def apply_rules(cell, neighbour_live_count)
+    # All of Conway's rules.
+    evolved_cell_value = cell
+    if cell == false && neighbour_live_count == 3
+      evolved_cell_value = true
+    elsif cell == true && neighbour_live_count < 2
+      evolved_cell_value = false
+    elsif cell == true && neighbour_live_count > 3
+      evolved_cell_value = false
+    elsif cell == true
+      evolved_cell_value = true
     end
-    puts 'evolved board'
-    puts 'Board'
-    display(@board)
-    puts 'evolved_board'
-    display(evolved_board)
+    evolved_cell_value
   end
-
-  def apply_rules(living_neighbours)
-    puts 'living neighbours'
-    puts living_neighbours
-    cell = ''
-    if living_neighbours < 2
-      cell = 'dead'
-    elsif living_neighbours > 3
-      cell = 'dead'
-    elsif living_neighbours == 3
-      cell = 'alive'
-    end
-    puts "value is #{cell}"
-    cell
-  end
-
-  def display(board)
-    board.state.each do |row|
-      row.each do |cell|
-        print cell.state == 'dead' ? 'O' : 'X'
-      end
-      puts "\n"
-    end
-  end
-
 end
