@@ -1,5 +1,4 @@
 module Display
-
   def self.show(data)
     system "clear"
     data.each do |row|
@@ -11,7 +10,15 @@ module Display
   end
 
   def self.pretty_output(cell)
-    cell ? 'X' : ' '
+    cell ? occupied_cell : empty_cell
+  end
+
+  def self.empty_cell
+    '-'
+  end
+
+  def self.occupied_cell
+    'O'
   end
 
 end
