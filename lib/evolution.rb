@@ -18,7 +18,7 @@ class Evolution
         # Find neighbours of current cell locaiton
         neighbours = original_board.neighbours(row_index, cell_index)
         # Find the neighbours that return true / are live
-        neighbour_live_count = neighbours.select{|value| value == true }.length
+        neighbour_live_count = neighbours.select { |value| value == true }.length
         # Apply the rules to the current cell location, based on neighbours
         evolved_cell_value = apply_rules(cell, neighbour_live_count)
         # Set current board coordinate to the result of the applied rules

@@ -41,17 +41,16 @@ describe Board do
     it 'with correct array content for corner cell' do
       board = Board.new(5, 5, true)
       manual_result = []
-      manual_result << board.location(0,1) << board.location(1,1) << board.location(1,0)
+      manual_result << board.location(0, 1) << board.location(1, 1) << board.location(1,0)
       result = board.neighbours(0, 0)
       expect(result).to eq manual_result
     end
     it 'with correct array content for inner cell' do
       board = Board.new(5, 5, true)
       manual_result = []
-      manual_result << board.location(2, 1) << board.location(1,1) << board.location(1,2) << board.location(1,3) << board.location(2,3) << board.location(3,3) << board.location(3,2) << board.location(3,1)
+      manual_result << board.location(2, 1) << board.location(1, 1) << board.location(1, 2) << board.location(1, 3) << board.location(2, 3) << board.location(3, 3) << board.location(3, 2) << board.location(3, 1)
       result = board.neighbours(2, 2)
       expect(result).to eq manual_result
     end
   end
-
 end
