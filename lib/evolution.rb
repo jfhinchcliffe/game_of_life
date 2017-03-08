@@ -1,4 +1,4 @@
-require 'board'
+require_relative './board'
 # Class/ Evolution
 class Evolution
   attr_reader :board
