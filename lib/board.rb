@@ -39,15 +39,27 @@ class Board
     # or it will wrap around and return the wrong array element.
     # Also... this is ugly! Need to refactor
     neighbours = []
-    neighbours << @state[row][column - 1] if in_bounds(row, column - 1)
-    neighbours << @state[row - 1][column - 1] if in_bounds(row - 1, column - 1)
-    neighbours << @state[row - 1][column] if in_bounds(row - 1, column)
-    neighbours << @state[row - 1][column + 1] if in_bounds(row - 1, column + 1)
-    neighbours << @state[row][column + 1] if in_bounds(row, column + 1)
-    neighbours << @state[row + 1][column + 1] if in_bounds(row + 1, column + 1)
-    neighbours << @state[row + 1][column] if in_bounds(row + 1, column)
-    neighbours << @state[row + 1][column - 1] if in_bounds(row + 1, column - 1)
+
+    get_neighbour_coordinates(row, column).each do |element|
+      row = element[0]
+      column = element[1]
+      neighbours << @state[row][column] if in_bounds(row, column)
+    end
     neighbours
+  end
+
+  def get_neighbour_coordinates(row, column)
+    #Creates a grid of the coordinate neighbours
+    [
+      [row,     column - 1],
+      [row - 1, column - 1],
+      [row - 1, column],
+      [row - 1, column + 1],
+      [row,     column + 1],
+      [row + 1, column + 1],
+      [row + 1, column],
+      [row + 1, column - 1]
+    ]
   end
 
   def in_bounds(row, column)
