@@ -6,20 +6,7 @@ class Board
   end
 
   def set_board(rows, columns, random)
-    board = []
-    rows.times do
-      board << create_row(columns, random)
-    end
-    board
-  end
-
-  def create_row(columns, random)
-    row = []
-    columns.times do
-      cell_value = random ? random_value : false
-      row << cell_value
-    end
-    row
+    Array.new(rows) { Array.new(columns) {random ? random_value() : false}}
   end
 
   def random_value
