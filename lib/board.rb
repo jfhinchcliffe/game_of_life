@@ -9,9 +9,7 @@ class Board
     Array.new(rows) { Array.new(columns) {random ? random_value() : false}}
   end
 
-  def random_value
-    [true, false].sample
-  end
+
 
   def set_coordinate_value(row, column, value)
     @state[row][column] = value
@@ -28,8 +26,7 @@ class Board
     neighbours = []
 
     get_neighbour_coordinates(row, column).each do |element|
-      row = element[0]
-      column = element[1]
+      row, column = element
       neighbours << @state[row][column] if in_bounds(row, column)
     end
     neighbours
@@ -58,4 +55,11 @@ class Board
       return false
     end
   end
+
+  private
+
+  def random_value
+    [true, false].sample
+  end
+
 end
