@@ -1,6 +1,6 @@
 # GameOfLife
 
-Code challenge for junior position at Marketplacer
+Code challenge for junior dev position
 March, 2017
 By Jason Hinchcliffe
 
@@ -16,7 +16,7 @@ By Jason Hinchcliffe
 - Any live cell with more than three live neighbours dies, as if by overpopulation.
 - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
-Challenge can be found here: [https://gist.github.com/mipearson/572ee773572b9b7f9372c6f98feb3bfc](https://gist.github.com/mipearson/572ee773572b9b7f9372c6f98feb3bfc)
+Challenge can be found here: [https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
 ## Notes / Improvements
 - The Neighbours method in Board needs refactoring - super ugly.
