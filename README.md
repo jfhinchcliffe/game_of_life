@@ -24,4 +24,4 @@ Challenge can be found here: [https://en.wikipedia.org/wiki/Conway%27s_Game_of_L
 - In the Evolution test I'm requiring Board. Need to figure out how to test Evolution in isolation.
 - Display isn't tested - not sure how to test text output to terminal.
 
-bkua_706200ff60d8913e024fc87dcc932b2913cb17aa
+bkua_480bd382ddce9f49f9f36757a98170169af13fe0
